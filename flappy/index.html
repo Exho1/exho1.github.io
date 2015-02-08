@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+	
+	var ctx;
+	var windowWidth = 500;
+	var windowHeight = 700;
+	
+	function init() {
+		var c = document.getElementById("myCanvas");
+		ctx = c.getContext("2d");
+		
+		ctx.fillRect( 0, 0, windowWidth, windowHeight );
+		
+		setInterval(draw, 33);
+		
+		// Update stuff so that everything moves smoothly
+		var lastUpdate = Date.now();
+		var myInterval = setInterval(tick, 0);
+
+		function tick() {
+			var now = Date.now();
+			var dt = now - lastUpdate;
+			lastUpdate = now;
+
+			update(dt);
+		}
+	}
+	
+	// Constants
+	var gravity = 9.8;
+	
+	// Variables
+	var shouldJump = false;
+	var bgMoveSpeed = 5;
+	var pipes = {};
+	
+	
+	// Player table
+	var player = {
+		// Hardcoded because grabbing image sizes sucks
+		w: 110,
+		h: 119,
+		x: 250 - 110/2,
+		y: 350 - 119,
+		velocity: 0,
+	}
+	
+	//createPipe( windowWidth )
+	
+	var lastY = 0;
+	function createPipe( x ) {
+		var topPipe = {};
+		var bottomPipe = {};
+		
+		var h = player.h;
+		var w = player.w;
+		
+		var min = w * 1.3;
+		var max = w * 2;
+		var buffer = Math.random() * (max - min) + min;
+		
+		min = lastY - w * 1.3;
+		max = lastY + w * 1.3;
+		var nextY = Math.random() * (max - min) + min;
+		
+		if (nextY < 100) {
+			nextY = 125;
+		} else if (nextY > windowHeight - 200 - buffer) {
+			nextY = windowHeight - 250 - buffer;
+		}
+		
+		lastY = nextY;
+		
+		topPipe.x = x;
+		topPipe.y = nextY - 778;
+		bottomPipe.x = x;
+		bottomPipe.y = nextY + buffer;
+		
+		pipes.push({top:topPipe, bottom:bottomPipe});
+	}
+	
+	// Update game logic
+	function update( dt ) {
+		
+		// The force of gravity
+		player.velocity += gravity * 0.003;
+		player.y += player.velocity;
+		
+		// Clamp velocity
+		if (player.velocity >= 3) {
+			player.velocity = 3;
+		} else if (player.velocity <= -3) {
+			player.velocity = -3;
+		}
+		
+		// Clamp player within screen
+		if (player.y + player.h >= windowHeight - 200) {
+			player.y = windowHeight - player.h - 200;
+		} else if (player.y <= 0) {
+			player.y = 0;
+		}
+		
+		// Space bar jump
+		if (shouldJump) {
+			player.velocity = -3;
+		}
+		
+		ctx.font = "16px Arial";
+		ctx.fillStyle = "white";
+		ctx.fillText(shouldJump, 15, 35);
+	}
+	
+	// Draw visuals
+	var firstBgX = 0;
+	var nextBgX = windowWidth;
+	function draw() {
+		// Draw main background
+		var background = new Image();
+		background.src = "images/background.png";
+		background.onload = function() {
+			var self = this;
+			ctx.drawImage( self, firstBgX, 0 );
+		}
+		
+		// Draw secondary background
+		var background2 = new Image();
+		background2.src = "images/background.png";
+		background2.onload = function() {
+			var self = this;
+			ctx.drawImage( self, nextBgX, 0 );
+		}
+		
+		// Draw the first ground
+		var foreground = new Image();
+		foreground.src = "images/ground.png";
+		foreground.onload = function() {
+			var self = this;
+			ctx.drawImage( self, firstBgX, windowHeight - self.height );
+		}
+		
+		// Draw the secondary ground
+		var foreground2 = new Image();
+		foreground2.src = "images/ground.png";
+		foreground2.onload = function() {
+			var self = this;
+			ctx.drawImage( self, nextBgX, windowHeight - self.height );
+		}
+		
+		// Make sure they loop
+		if (firstBgX + windowWidth <= 0) {
+			firstBgX = windowWidth;
+		} else if (nextBgX + windowWidth <= 0) {
+			nextBgX = windowWidth;
+		}
+		
+		// Advance them negatively
+		firstBgX += -bgMoveSpeed
+		nextBgX += -bgMoveSpeed
+
+		// Create a player
+		var playerImage = new Image();
+		playerImage.src = "images/shrek.png";
+		player.w = playerImage.width;
+		player.h = playerImage.height;
+		playerImage.onload = function() {
+			var self = this;
+			ctx.drawImage( self, player.x, player.y );
+		}
+	}
+	
+	// Log the spacebar press
+	function keyUp(event) {
+		if (event.which == 32) {
+			shouldJump = false;
+		}
+	}
+	function keyDown(event) {
+		if (event.which == 32) {
+			if (shouldJump != true) {
+				shouldJump = true;
+			}
+		}
+	}
+	
+	document.addEventListener("keydown", keyDown);
+	document.addEventListener("keyup", keyUp);
+</script>
+</head>
+<body onload="init()">
+	<canvas id="myCanvas" width="500" height="700"></canvas>
+</body>
+</html>
+
