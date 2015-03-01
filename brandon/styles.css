@@ -4,21 +4,42 @@ body, html {
 	overflow: hidden;
 }
 
+/* Detect mobile and hide normal elements */
+@media only screen and (max-width: 760px) {
+  #bg-container { display: none; }
+  #parallax-container { display: none; }
+  #mobile-warning { visibility: visible; }
+}
+
+/* Mobile warning div */
+#mobile-warning {
+	visibility: hidden;
+	
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Holds all background images */
 #bg-container {
-	top: -25vh;
+	/* Adjust top and center image */
+	top: -25vh; 
 	left : -50vw;
 	right : -50vw;
 
+	/* Correct height and width */
 	height: 200vh;
 	width: 200vw;
 	transform-origin: 50% 0%;	
     position: absolute;
 }
 
+/* Backgrounds */
 #bg-image1, #bg-image2, #bg-image3, #bg-image4 {
 	width: 100%;
     height: 100%;
 	position: relative;
+	padding: 0 0 0 0;
 }
 
 #parallax-image {
