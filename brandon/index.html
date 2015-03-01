@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Swagaroony</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div id="bg-container">
+		<!-- Chopping images up seems to work nicely for both loading and parallaxing -->
+		<img id="bg-image1" src="assets/school_piece_1.jpeg">
+		<img id="bg-image2" src="assets/school_piece_2.jpeg">
+		<img id="bg-image3" src="assets/school_piece_3.jpeg">
+		<img id="bg-image4" src="assets/school_piece_4.jpeg">
+	</div>
+	
+	<div id="parallax-container" 
+		data-anchor-target="#bg-image2"
+		data-bottom-bottom="top:70%" 
+		data-top-bottom="top:30%;"
+		
+		<!--
+		data-30%= "opacity:0"
+		data-36%="top:70%" 
+		data-56%="top:45%; opacity:1" 
+		data-60%=""
+		data-73%="top:30%; opacity:0.5"
+		data-76%="opacity:0"
+		-->
+	>
+		<img id="parallax-image" src="assets/text_hosa.png">
+	</div>
+	
+	<script type="text/javascript" src="thirdparty/jquery-2.1.3.min.js"></script>
+	<!--<script type="text/javascript" src="thirdparty/foggy/jquery.foggy.min.js"></script>-->
+	<script type="text/javascript" src="thirdparty/skrollr/dist/skrollr.min.js"></script>
+    <script type="text/javascript">
+		var s = skrollr.init({
+			constants: {
+				imgHeight: document.getElementById('bg-container').clientHeight
+			},
+			render: function(data) {
+				console.log(data.curTop);
+			},
+			smoothScrolling: true,
+		})
+	</script>
+</body>
+</html>
+
