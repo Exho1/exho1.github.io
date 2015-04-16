@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Lau tortorial</title>
+</head>
+
+<body>
+<h2>WHAT IS THIS</h2>
+<p>This is Lua, a scripting language meant to be embedded into stuff mostly. Its not L.U.A., LUA, and definitely not Laua. Lua means moon in 
+Portuguese, now you know. Its pretty similar to english.
+
+<h2>VARIABLES</h2>
+<p>Variables are ways to store information to be retrieved later. In Lua you have 2 types of variables: global and local. Global variables can be
+accessed anywhere while local can only be accessed in the block of code they were defined. When you declare a variable but do not give it a
+value, it has the value of "nil" which means nothing.
+<br>
+<br>local x = 2 -- Local
+<br>message = "Keep the change you filthy animal" -- Global
+<p>This will make more sense later but its generally better to declare variables local as to not overwrite other people's stuff.
+
+<h2>TYPES</h2>
+<p>Lua has a few different types of variables in order to hold variables of different kinds. Unlike other languages you don't need to declare
+the variable type, Lua figures it out, but it still good that you know what type each variable is.
+<br>
+<br>Type - Example - Desc
+<br>Boolean - true/false - Simple as that, boolean variables are either true or false.
+<br>String - "heyo123" - Segments of text or other characters without a numeric value. They are created by wrapping text in quotation marks
+<br>Number - 100.123 - Also self-explanatory. You don't have to define if a number is a decimal or integer.
+<br>Table - {"First entry", "SecondEntry", ["Key"] = "value"} - Holds multiple variables of information in a Key-value format where the key is
+the value's position in the table. The first two strings I entered into the table don't have a declared value so they will assume keys 1 and 2 but
+the third example I declared as a string key.
+<br>Function - function myFunc( x ) x = x + 1 end - Contains a block of code that can be called at will as many times as needed. It can also be
+passed variables in the form of arguments and can return values to the code where the function is called
+<br>Nil - local myName = nil - Not really a variable type but more accurately the absense of a useful value.
+<p>All of these may seem like pretty simple concepts and you might wonder how on earth this could be used to make stuff like NPCs, HUDs, or
+even entire gamemodes. Find some gamemode code on Github like TTT's source and read through it, a lot of these concepts are just used in 
+different forms.
+
+<h2>Operators</h2>
+
+<h2>LOGIC</h2>
+<p>The basic gist of coding is logical stuff such as loops and conditional statements. They are used to do things like check if a player is dead,
+if a weapon is present at position (0,0,0), or if the color of a barrel is red.
+<br>
+<br>local x = 24
+<br>if x > 25 then
+<br>&nbsp;print("This isn't possible!!")
+<br>else
+<br>&nbsp;print("X is less than 25")
+<br>end
+<p>That is an 'if then' statement which checks if a condition is met and if so executes a block of code. If you want to run code when the 
+condition fails you can add the 'else' keyword to run another block of code. Finally the statement is closed with the 'end' keyword which
+tells Lua this statement is done and not to treat any code beyond this as being in this block.
+<br>
+<br>local money = 500
+<br>while money < 1000 do
+<br>&nbsp;print("need more money")
+<br>&nbsp;money = money + 1 -- Increment the value of money by 1 each pass
+<br>end
+<p>This is a 'while do' loop which runs a block of code over and over until the condition is met, its a bad idea to use these in Garry's Mod
+as you will crash your game. Each loop or iteration of this code will call the function 'print' and increase money by 1
+
+
+<p>I'M OUT OF TIME, RIP
+</body>
+
+</html>
+
