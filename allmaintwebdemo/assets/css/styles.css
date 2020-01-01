@@ -1,0 +1,36 @@
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+  color: rgba(255,255,255,0.9);
+}
+
+#home {
+}
+
+.text-left {
+}
+
+.img-carousel-caption {
+  padding-left: 10px;
+  background-color: #c0392b;
+  font-size: 20px;
+  color: rgb(255,255,255);
+}
+
+.w-100.d-block.img-carousel-image {
+  opacity: 0.90;
+  max-width: 100%!important;
+}
+
+.header-color-bar {
+  background-color: #c0392b;
+  color: rgb(255,255,255);
+  width: 50%;
+  /*min-width: 500px;*/
+  margin: auto;
+  text-align: center;
+}
+
+.testimonial-div {
+  max-width: 50%;
+  margin: auto;
+}
+
